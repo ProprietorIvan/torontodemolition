@@ -1,260 +1,156 @@
-import React from 'react';
-import ComparisonSection from '@/components/ComparisonSection';
-import FAQ from '@/components/FAQ';
-import FeaturesSection from '@/components/Features';
-import Navigation from '@/components/Navigation';
-import StepsSection from '@/components/StepsSection';
-import Reviews from '@/components/reviews';
-import { Star } from 'lucide-react';
+import { Phone, Mail, ArrowRight, Shield } from 'lucide-react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Head from 'next/head';
-
-const SITE_URL = 'https://toronto-drywall.com';
-const SITE_NAME = 'Toronto Drywall Repairs';
-const SITE_DESCRIPTION = 'Professional drywall installation, repair, and finishing services across the Greater Toronto Area. Expert contractors with 500+ satisfied clients.';
-const BUSINESS_EMAIL = 'office@toronto-drywall.com';
+import { useState, useEffect } from 'react';
+import ComparisonSection from '@/components/ComparisonSection';
+import FAQ from '@/components/FAQ';
+import Navigation from '@/components/Navigation';
+import StepsSection from '@/components/StepsSection';
 
 const Home = () => {
   const router = useRouter();
-  
-  const localBusinessSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${SITE_URL}/#organization`,
-    name: SITE_NAME,
-    image: `${SITE_URL}/photos/homepage/1.jpg`,
-    description: SITE_DESCRIPTION,
-    url: SITE_URL,
-    email: BUSINESS_EMAIL,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Toronto',
-      addressRegion: 'ON',
-      addressCountry: 'CA'
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 43.6532,
-      longitude: -79.3832
-    },
-    areaServed: [
-      {
-        '@type': 'City',
-        name: 'Toronto'
-      },
-      {
-        '@type': 'City',
-        name: 'North York'
-      },
-      {
-        '@type': 'City',
-        name: 'Etobicoke'
-      },
-      {
-        '@type': 'City',
-        name: 'Scarborough'
-      }
-    ],
-    priceRange: '$$',
-    openingHours: 'Mo-Sa 08:00-18:00'
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const handleNavigation = (path: string) => {
+    router.push(path);
   };
 
-  const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: ['Drywall Installation', 'Drywall Repair', 'Drywall Finishing'],
-    provider: {
-      '@id': `${SITE_URL}/#organization`
-    },
-    areaServed: {
-      '@type': 'City',
-      name: 'Toronto'
-    },
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Drywall Services',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Drywall Installation',
-            description: 'Professional drywall installation services in Toronto'
-          }
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Drywall Repair',
-            description: 'Expert drywall repair and patch services'
-          }
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Drywall Finishing',
-            description: 'High-quality drywall finishing and texturing'
-          }
-        }
-      ]
-    }
+  const handleEmergencyCall = () => {
+    window.location.href = 'tel:+1 (647) 361-0663';
   };
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'How long does a typical drywall repair take?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Small repairs like patching holes can be completed in 2-4 hours. Larger repairs or full room installations typically take 1-2 days.'
-        }
-      },
-      {
-        '@type': 'Question',
-        name: 'Do you provide free estimates?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes, we provide free, no-obligation estimates for all drywall repair and installation projects in Toronto.'
-        }
-      }
-    ]
+  const handleEmailContact = () => {
+    window.location.href = 'mailto:projects@torontodemolition.com';
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-white">
       <Head>
-        <title>{SITE_NAME} | Expert Drywall Services in Toronto</title>
-        <meta name="description" content={SITE_DESCRIPTION} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charSet="utf-8" />
-        
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={SITE_URL} />
-        <meta property="og:title" content={`${SITE_NAME} | Expert Drywall Services in Toronto`} />
-        <meta property="og:description" content={SITE_DESCRIPTION} />
-        <meta property="og:image" content={`${SITE_URL}/photos/homepage/1.jpg`} />
-        <meta property="og:site_name" content={SITE_NAME} />
-        <meta property="og:locale" content="en_CA" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content={SITE_URL} />
-        <meta name="twitter:title" content={`${SITE_NAME} | Expert Drywall Services`} />
-        <meta name="twitter:description" content={SITE_DESCRIPTION} />
-        <meta name="twitter:image" content={`${SITE_URL}/photos/homepage/1.jpg`} />
-
-        {/* Additional SEO Meta Tags */}
-        <meta name="keywords" content="drywall repair toronto, drywall installation, drywall contractors, toronto drywall services, gta drywall repair" />
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content={SITE_NAME} />
-        <meta name="geo.region" content="CA-ON" />
-        <meta name="geo.placename" content="Toronto" />
-        <meta name="geo.position" content="43.6532;-79.3832" />
-        <meta name="ICBM" content="43.6532, -79.3832" />
-
-        {/* Canonical URL */}
-        <link rel="canonical" href={SITE_URL} />
-        
-        {/* Structured Data */}
-        <script 
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        <title>Toronto Demolition Experts | Professional Demolition Services</title>
+        <meta 
+          name="description" 
+          content="Toronto&apos;s trusted demolition experts. Professional structural demolition, industrial removal & site clearing across GTA. Fully licensed & insured."
         />
-        <script 
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-        />
-        <script 
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-        
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
 
-      <div className="min-h-screen bg-white">
+      {/* Sticky Navigation */}
+      <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <Navigation showActions={false} />
+      </div>
 
-        {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center">
-          <div className="absolute inset-0 w-full h-full">
-            <Image
-              src="/photos/homepage/1.jpg"
-              alt="Professional Drywall Repair Services in Toronto"
-              fill
-              className="object-cover object-[85%_25%]"
-              priority
-            />
-            <div className="absolute inset-0 bg-black/40"></div>
-          </div>
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-16 overflow-hidden">
+        <div className="absolute inset-0 bg-[#8B2635] transform -skew-y-6 origin-top-left translate-y-32" />
+        
+        <div className="max-w-7xl mx-auto px-4 relative">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className={`space-y-8 transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+              {/* Trust Badge */}
+              <div className="inline-flex items-center space-x-2 bg-white/10 text-white px-4 py-2 rounded-lg">
+                <Shield className="w-5 h-5" />
+                <span className="font-medium">Fully Licensed & Insured</span>
+              </div>
 
-          <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-32 w-full">
-            <div className="max-w-2xl">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-white">
-                Expert Drywall Repairs in Toronto
+              <h1 className="text-5xl lg:text-7xl font-bold text-white">
+                Precision
+                <span className="block mt-2">Demolition</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white mb-8">
-                Professional drywall installation, repair, and finishing services across the GTA
+
+              <p className="text-xl text-white/90 max-w-xl">
+                Where power meets precision. Toronto&apos;s most trusted demolition experts, 
+                bringing 25 years of excellence to every project.
               </p>
-              <button
-                onClick={() => window.open('/quote', '_current')}
-                className="bg-white text-black px-8 py-4 rounded-lg text-lg font-medium mb-8 hover:bg-yellow-400 transition-colors duration-300">
-                Get Free Estimate
-              </button>
-              <div className="flex items-center gap-3">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <span className="text-white text-lg">500+ Satisfied Clients in Toronto</span>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={handleEmergencyCall}
+                  className="group bg-white text-[#8B2635] px-6 py-4 rounded-lg text-lg font-medium 
+                           transition-all hover:bg-gray-100 hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  <div className="flex items-center justify-center gap-2">
+                    <Phone className="w-5 h-5" />
+                    <span>(647) 361-0663</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+
+                <button
+                  onClick={handleEmailContact}
+                  className="group bg-[#8B2635] border-2 border-white text-white px-6 py-4 rounded-lg text-lg font-medium 
+                           transition-all hover:bg-white hover:text-[#8B2635] hover:-translate-y-0.5"
+                >
+                  <div className="flex items-center justify-center gap-2">
+                    <Mail className="w-5 h-5" />
+                    <span>Free Quote</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div className={`relative transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+              <div className="relative h-[600px] rounded-lg overflow-hidden">
+                <Image
+                  src="/photos/homepage/1.jpg"
+                  alt="Professional Demolition Services"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
-        </section>
-
-        <div className="relative z-10">
-          <ComparisonSection />
-          <StepsSection />
-          <Reviews />
-          <FAQ />
         </div>
+      </section>
 
-        {/* CTA Section */}
-        <section className="bg-black text-white py-24">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Need Professional Drywall Services in Toronto?
-            </h2>
-            <p className="text-gray-300 mb-12 text-xl max-w-3xl mx-auto">
-              Join hundreds of satisfied Toronto homeowners who trust us with their drywall needs
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button
-                onClick={() => router.push('/quote')}
-                className="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-lg text-lg font-medium hover:bg-yellow-400 transition-colors duration-300">
-                Request Free Quote
-              </button>
-              <button
-                onClick={() => router.push('/services')}
-                className="w-full sm:w-auto bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-white hover:text-black transition-colors duration-300">
-                View All Services
-              </button>
-            </div>
+      <ComparisonSection />
+      <StepsSection />
+      <FAQ />
+
+      {/* CTA Section */}
+      <section className="py-24 bg-[#8B2635]">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+            Ready to Start Your Project?
+          </h2>
+          
+          <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
+            Get expert consultation and a free quote for your demolition needs.
+            Our team is ready to help bring your vision to life.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <button
+              onClick={handleEmergencyCall}
+              className="group bg-white text-[#8B2635] px-8 py-4 rounded-lg text-lg font-medium 
+                       transition-all hover:bg-gray-100 hover:shadow-lg hover:-translate-y-0.5"
+            >
+              <div className="flex items-center justify-center gap-2">
+                <Phone className="w-5 h-5" />
+                <span>(647) 361-0663</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </button>
+            
+            <button
+              onClick={handleEmailContact}
+              className="group bg-[#8B2635] border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-medium 
+                       transition-all hover:bg-white hover:text-[#8B2635] hover:-translate-y-0.5"
+            >
+              <div className="flex items-center justify-center gap-2">
+                <Mail className="w-5 h-5" />
+                <span>Request Quote</span>
+              </div>
+            </button>
           </div>
-        </section>
-      </div>
-    </>
+        </div>
+      </section>
+    </div>
   );
 };
 
