@@ -89,12 +89,12 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F0]">
-      <Navigation transparent />
+    <div className="min-h-screen bg-[#2C3E50]">
+      <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-20 bg-gradient-to-b from-neutral-100 to-[#F5F5F0]">
-        <div className="absolute inset-0 bg-grid-neutral-200 bg-[size:32px_32px] [mask-image:linear-gradient(to_bottom,white,transparent)]" />
+      <section className="relative pt-20 bg-gradient-to-b from-[#2C3E50] to-[#1a2530]">
+        <div className="absolute inset-0 bg-grid-neutral-200 bg-[size:32px_32px] [mask-image:linear-gradient(to_bottom,white,transparent)] opacity-10" />
 
         <div className="max-w-7xl mx-auto px-4 relative">
           <div className="flex flex-col md:flex-row gap-12 items-center py-16">
@@ -102,10 +102,10 @@ const Contact = () => {
               <div className="inline-block bg-[#E74C3C] text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
                 Get in Touch
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-[#2C3E50]">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
                 Contact Us
               </h1>
-              <p className="text-xl text-[#5D6D7E] mb-8 leading-relaxed">
+              <p className="text-xl text-[#BDC3C7] mb-8 leading-relaxed">
                 Have a demolition project in mind? We&apos;re here to help.
                 Contact us today for a free consultation.
               </p>
@@ -121,16 +121,25 @@ const Contact = () => {
             </div>
 
             <div className="w-full md:w-1/2">
-              <div className="relative h-[500px] w-full">
-                <Image
-                  src="/photos/homepage/6.jpg"
-                  alt="Toronto Demolition Contact"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover rounded-xl"
-                  priority
-                />
-                <div className="absolute inset-0 rounded-xl ring-1 ring-black/10" />
+              <div className="relative h-[60vh] flex items-center justify-center">
+                <div className="absolute inset-0">
+                  <Image
+                    src="/images/hero-bg.jpg"
+                    alt="Contact Us"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-black/50"></div>
+                </div>
+                <div className="relative z-10 text-center text-white px-4">
+                  <h1 className="text-5xl md:text-6xl font-bold mb-4">
+                    Contact Us
+                  </h1>
+                  <p className="text-xl md:text-2xl max-w-2xl mx-auto">
+                    Get in touch with our team for expert demolition services
+                  </p>
+                </div>
               </div>
             </div>
           </div>

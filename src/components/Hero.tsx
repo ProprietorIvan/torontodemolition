@@ -1,7 +1,7 @@
-import { Clock, Phone } from "lucide-react"
+import { Clock, Phone } from "lucide-react";
 import Quote from "./Quote";
 import BusinessFrom from "./BusinessForm";
-import Testemonials from '@/components/Testemonials';
+import Testemonials from "@/components/Testimonials";
 
 interface HeroProps {
   examples: string[];
@@ -14,7 +14,16 @@ interface HeroProps {
   quoteDescription: string;
 }
 
-const Hero = ({ examples, context, title, subtitle, description, quoteTitle = '', quoteSubtitle = '', quoteDescription = '' }: HeroProps) => (
+const Hero = ({
+  examples,
+  context,
+  title,
+  subtitle,
+  description,
+  quoteTitle = "",
+  quoteSubtitle = "",
+  quoteDescription = "",
+}: HeroProps) => (
   <>
     <section className="relative px-4 sm:px-6 pt-20 sm:pt-32 pb-16 sm:pb-24 text-center min-h-[100svh] flex items-center justify-center overflow-hidden">
       {/* Background Video with Overlay */}
@@ -35,42 +44,72 @@ const Hero = ({ examples, context, title, subtitle, description, quoteTitle = ''
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4">
         <div>
           <section>
-            <h1 className='text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-4 sm:mb-6 leading-[1.1]'>{title}</h1>
-            <h1 className='text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-4 sm:mb-6 leading-[1.1]'>{subtitle}</h1>
-            <p className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300 mb-7">{description}</p>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-4 sm:mb-6 leading-[1.1]">
+              {title}
+            </h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-4 sm:mb-6 leading-[1.1]">
+              {subtitle}
+            </h1>
+            <p className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300 mb-7">
+              {description}
+            </p>
             <div className="flex gap-2 justify-center">
-              <a onClick={() => {
-                const yourhome = document.querySelector('#yourhome');
-                if (yourhome) {
-                  yourhome.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
-                }
-              }
-              } className="bg-black text-white py-[12px] px-[24px] rounded-[99px] hover:bg-[#ffc527] hover:text-black">Your Home</a>
-              <a onClick={() => {
-                const businessFormCards = document.querySelector('#businessFormCards');
-                if (businessFormCards) {
-                  businessFormCards.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
-                }
-                const businessFormSubmit = document.querySelector('#businessFormSubmit');
-                setTimeout(() => {
-                  if (businessFormSubmit) {
-                    businessFormSubmit.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+              <a
+                onClick={() => {
+                  const yourhome = document.querySelector("#yourhome");
+                  if (yourhome) {
+                    yourhome.scrollIntoView({
+                      behavior: "smooth",
+                      block: "end",
+                      inline: "nearest",
+                    });
                   }
-                }, 2500)
-              }} className="bg-black text-white py-[12px] px-[24px] rounded-[99px] hover:bg-[#ffc527] hover:text-black">Your Business</a>
+                }}
+                className="bg-black text-white py-[12px] px-[24px] rounded-[99px] hover:bg-[#ffc527] hover:text-black"
+              >
+                Your Home
+              </a>
+              <a
+                onClick={() => {
+                  const businessFormCards =
+                    document.querySelector("#businessFormCards");
+                  if (businessFormCards) {
+                    businessFormCards.scrollIntoView({
+                      behavior: "smooth",
+                      block: "end",
+                      inline: "nearest",
+                    });
+                  }
+                  const businessFormSubmit = document.querySelector(
+                    "#businessFormSubmit"
+                  );
+                  setTimeout(() => {
+                    if (businessFormSubmit) {
+                      businessFormSubmit.scrollIntoView({
+                        behavior: "smooth",
+                        block: "end",
+                        inline: "nearest",
+                      });
+                    }
+                  }, 2500);
+                }}
+                className="bg-black text-white py-[12px] px-[24px] rounded-[99px] hover:bg-[#ffc527] hover:text-black"
+              >
+                Your Business
+              </a>
             </div>
           </section>
           <section className="flex justify-between my-[70px]">
             <div className="text-white">
-              <h2 className='text-4xl font-bold mb-2'>1,200+</h2>
+              <h2 className="text-4xl font-bold mb-2">1,200+</h2>
               <p className="lazyloaded">Projects completed</p>
             </div>
             <div className="text-white">
-              <h2 className='text-4xl font-bold  mb-2'>4.9</h2>
+              <h2 className="text-4xl font-bold  mb-2">4.9</h2>
               <p>Customer rating</p>
             </div>
             <div className="text-white">
-              <h2 className='text-4xl font-bold  mb-2'>24/7</h2>
+              <h2 className="text-4xl font-bold  mb-2">24/7</h2>
               <p>Support available</p>
             </div>
           </section>
@@ -97,6 +136,6 @@ const Hero = ({ examples, context, title, subtitle, description, quoteTitle = ''
     <Testemonials />
     <BusinessFrom />
   </>
-)
+);
 
 export default Hero;

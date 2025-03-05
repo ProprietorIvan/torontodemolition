@@ -2,7 +2,7 @@ import ComparisonSection from "@/components/ComparisonSection";
 import FAQ from "@/components/FAQ";
 import Navigation from "@/components/Navigation";
 import StepsSection from "@/components/StepsSection";
-import Testemonials from "@/components/Testemonials";
+import Testemonials from "@/components/Testimonials";
 import { Star, Phone, Mail, ArrowRight, MapPin } from "lucide-react";
 import { useRouter } from "next/router";
 import Image from "next/image";

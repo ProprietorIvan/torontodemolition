@@ -1,103 +1,86 @@
-import React from "react";
-import { ArrowRight } from "lucide-react";
+import React, { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const FAQ = () => {
-  const faqData = [
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = [
     {
-      question: "How long does a typical roof replacement take?",
+      question: "How quickly can you start a demolition project?",
       answer:
-        "Most residential roof replacements take 2-4 days to complete, depending on the size of your roof, weather conditions, and the type of materials being installed. We'll provide you with a specific timeline during your consultation.",
-    },
-    {
-      question: "Do you provide warranties on your roofing work?",
-      answer:
-        "Yes, we provide comprehensive warranties on both materials and workmanship. Our installations come with a 10-year workmanship warranty, and manufacturer warranties on materials typically range from 25-50 years depending on the product chosen.",
-    },
-    {
-      question: "Are you licensed and insured?",
-      answer:
-        "Yes, we are fully licensed, bonded, and insured in Vancouver. We carry comprehensive liability insurance and WorkSafeBC coverage for all our workers to ensure your complete protection throughout the project.",
-    },
-    {
-      question: "What roofing materials do you work with?",
-      answer:
-        "We work with all major roofing materials including asphalt shingles, metal roofing, cedar shakes, slate, and flat roofing systems. During your consultation, we'll help you choose the best material for your specific needs and budget.",
-    },
-    {
-      question: "Do you offer emergency roof repair services?",
-      answer:
-        "Yes, we provide 24/7 emergency roof repair services for urgent issues like leaks or storm damage. Our team will respond quickly to prevent further damage to your property.",
-    },
-    {
-      question: "What should I expect during the consultation process?",
-      answer:
-        "During the consultation, our expert will thoroughly inspect your roof, discuss your needs and concerns, and provide a detailed written estimate. We'll explain all your options and help you make an informed decision about your roofing project.",
-    },
-    {
-      question: "What types of demolition services do you offer?",
-      answer:
-        "We provide comprehensive demolition services including residential, commercial, and industrial demolition. Our services range from complete building demolition to selective demolition, interior demolition, and site clearing. We also handle hazardous material removal and site preparation for new construction.",
-    },
-    {
-      question: "How long does a typical demolition project take?",
-      answer:
-        "Project duration varies based on size and complexity. A typical residential demolition can take 1-2 weeks, while larger commercial projects may take 2-4 weeks. We'll provide a detailed timeline during our initial assessment.",
+        "We typically can start most projects within 1-2 business days after receiving all necessary permits. For emergency situations, we offer 24/7 service and can respond within hours. The exact timeline depends on the project size, complexity, and required permits.",
     },
     {
       question: "Do you handle all the necessary permits?",
       answer:
-        "Yes, we handle all required permits and documentation, including building permits, environmental permits, and utility disconnection permits. Our team is well-versed in Toronto's building codes and regulations.",
+        "Yes, we handle all required permits for demolition projects, including building permits, environmental permits, and any other necessary documentation. Our team is experienced in navigating Toronto's permitting process and will ensure all legal requirements are met.",
     },
     {
-      question: "What safety measures do you implement?",
+      question: "What areas in Toronto do you service?",
       answer:
-        "Safety is our top priority. We implement comprehensive safety protocols including site fencing, dust control, noise management, and regular safety inspections. Our crew is OSHA-certified and follows strict safety guidelines.",
+        "We service the entire Greater Toronto Area (GTA), including Toronto, Mississauga, Brampton, Vaughan, Markham, Richmond Hill, and surrounding areas. Our team is equipped to handle projects of any size across the region.",
     },
     {
-      question: "How do you handle debris and waste materials?",
+      question: "Do you offer free estimates?",
       answer:
-        "We follow strict environmental guidelines for waste management. Materials are sorted for recycling when possible, and all waste is properly disposed of at licensed facilities. We maintain detailed documentation of all waste handling.",
-    },
-    {
-      question: "Do you offer emergency demolition services?",
-      answer:
-        "Yes, we provide emergency demolition services for situations requiring immediate attention, such as fire-damaged buildings or structurally unsafe properties. Our team can respond quickly to assess and address urgent situations.",
+        "Yes, we provide free, detailed estimates for all demolition projects. Our estimates include a comprehensive breakdown of costs, timeline, and scope of work. We can provide estimates over the phone for basic projects or schedule an on-site visit for more complex jobs.",
     },
   ];
 
-  return (
-    <section className="py-16 px-5" id="faq">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/2">
-            <h3 className="text-3xl lg:text-4xl font-bold lg:tracking-tight">
-              Frequently Asked Questions
-            </h3>
-            <p className="text-lg mt-4 text-slate-600 dark:text-slate-400">
-              Get answers to common questions about our roofing and demolition
-              services
-            </p>
-          </div>
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
-          <div className="w-full md:w-1/2 max-w-xl mx-auto">
-            <div className="grid divide-y divide-neutral-200 dark:divide-slate-400">
-              {faqData.map((faq, index) => (
-                <div className="py-5" key={index}>
-                  <details className="group">
-                    <summary className="flex justify-between text-lg items-center font-medium cursor-pointer list-none">
-                      <span>{faq.question}</span>
-                      <span className="transition group-open:rotate-180">
-                        <ArrowRight className="h-5 w-5" />
-                      </span>
-                    </summary>
-                    <p className="text-slate-600 dark:text-slate-400 mt-3 group-open:animate-fadeIn">
-                      {faq.answer}
-                    </p>
-                  </details>
+  return (
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4 text-[#2C3E50]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-lg text-[#5D6D7E]">
+            Common questions about our demolition services
+          </p>
+        </div>
+
+        <div className="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="border border-neutral-200 rounded-lg overflow-hidden"
+            >
+              <button
+                className="w-full px-6 py-4 flex justify-between items-center text-left bg-white hover:bg-neutral-50 transition-colors"
+                onClick={() => toggleFAQ(index)}
+              >
+                <span className="text-lg font-medium text-[#2C3E50]">
+                  {faq.question}
+                </span>
+                {openIndex === index ? (
+                  <ChevronUp className="w-5 h-5 text-[#E74C3C]" />
+                ) : (
+                  <ChevronDown className="w-5 h-5 text-[#E74C3C]" />
+                )}
+              </button>
+              {openIndex === index && (
+                <div className="px-6 py-4 bg-neutral-50">
+                  <p className="text-[#5D6D7E]">{faq.answer}</p>
                 </div>
-              ))}
+              )}
             </div>
-          </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <p className="text-[#5D6D7E]">
+            Still have questions?{" "}
+            <a
+              href="tel:6476974584"
+              className="text-[#E74C3C] hover:text-[#D44332] transition-colors"
+            >
+              Call us at (647) 697-4584
+            </a>
+          </p>
         </div>
       </div>
     </section>
