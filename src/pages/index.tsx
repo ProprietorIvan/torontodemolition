@@ -2,7 +2,8 @@ import ComparisonSection from "@/components/ComparisonSection";
 import FAQ from "@/components/FAQ";
 import Navigation from "@/components/Navigation";
 import StepsSection from "@/components/StepsSection";
-import { Star, Phone, Mail, ArrowRight } from "lucide-react";
+import Testemonials from "@/components/Testemonials";
+import { Star, Phone, Mail, ArrowRight, MapPin } from "lucide-react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -28,15 +29,15 @@ const Home = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative z-10">
               <div className="inline-block bg-[#E74C3C] text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
-                Established 2022
+                Established 2008
               </div>
               <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 font-display text-[#2C3E50]">
-                Vancouver
-                <span className="block text-[#E74C3C]">Roofing Company</span>
+                Toronto&apos;s Premier
+                <span className="block text-[#E74C3C]">Demolition Company</span>
               </h1>
               <p className="text-xl text-[#5D6D7E] mb-8 max-w-lg">
-                Where traditional craftsmanship meets modern innovation in
-                residential and commercial roofing.
+                Professional demolition services with a focus on safety,
+                efficiency, and environmental responsibility.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -68,8 +69,22 @@ const Home = () => {
                 </div>
                 <div className="h-8 w-px bg-[#BDC3C7]" />
                 <p className="text-[#5D6D7E]">
-                  <span className="font-semibold">500+</span> Projects Completed
+                  <span className="font-semibold">1000+</span> Projects
+                  Completed
                 </p>
+              </div>
+
+              {/* Google My Business Link */}
+              <div className="mt-8">
+                <a
+                  href="https://g.page/r/CT-8D6c5FSyIEAE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#5D6D7E] hover:text-[#E74C3C] transition-colors"
+                >
+                  <MapPin className="w-5 h-5" />
+                  <span>View us on Google</span>
+                </a>
               </div>
             </div>
 
@@ -78,7 +93,7 @@ const Home = () => {
                 {/* Main image */}
                 <Image
                   src="/photos/homepage/5.jpg"
-                  alt="Professional Roofing Service"
+                  alt="Professional Demolition Service"
                   fill
                   priority
                   className="rounded-3xl object-cover object-center"
@@ -111,6 +126,7 @@ const Home = () => {
       <ComparisonSection />
       <StepsSection />
       <FAQ />
+      <Testemonials />
 
       {/* CTA Section */}
       <section className="relative py-24 overflow-hidden">
@@ -120,11 +136,11 @@ const Home = () => {
 
         <div className="max-w-7xl mx-auto px-4 text-center relative">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Elevate Your Roofing Project?
+            Ready to Start Your Demolition Project?
           </h2>
           <p className="text-[#BDC3C7] mb-12 text-lg max-w-2xl mx-auto">
-            Join Vancouver&apos;s most trusted roofing service. Professional
-            solutions, lasting quality.
+            Trust Toronto&apos;s most experienced demolition team. Safe,
+            efficient, and environmentally responsible.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button

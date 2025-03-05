@@ -1,105 +1,200 @@
-import React from 'react';
-import { Facebook, Twitter, Linkedin, Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+} from "lucide-react";
 
 const Footer = () => {
   return (
-    <div className="relative mt-16">
-      <footer className="bg-gradient-to-b from-[#2C3E50] to-[#1a2530] text-white py-12 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About Us Section */}
-          <div className="md:col-span-2">
-            <h3 className="text-xl font-semibold mb-4">
-              Vancouver Trusted Roofers
-            </h3>
-            <div className="h-1 w-16 bg-[#E74C3C] mb-6"></div>
-            <p className="text-[#BDC3C7] mb-6 leading-relaxed">
-              With over 25 years of experience in the roofing industry, we provide top-quality residential and commercial roofing services across Vancouver. From repairs to complete replacements, we are here to protect your investment.
+    <footer className="bg-[#2C3E50] text-white">
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Company Info */}
+          <div>
+            <h3 className="text-2xl font-bold mb-6">Toronto Demolition</h3>
+            <p className="text-[#BDC3C7] mb-6">
+              Your trusted partner for professional demolition services in
+              Toronto.
             </p>
-            <div className="text-[#95A5A6] text-sm">
-              <p>A proud brand of</p>
-              <a 
-                href="https://felicita.group" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-white hover:text-[#E74C3C] transition-colors duration-300 mt-2"
+            <div className="flex space-x-4">
+              <a
+                href="#"
+                className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
               >
-                Felicita Holdings Ltd. <ExternalLink size={14} />
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
 
-          {/* Services Section */}
+          {/* Services */}
           <div>
-            <h3 className="text-xl font-semibold mb-4">
-              OUR <span className="text-[#E74C3C]">SERVICES</span>
-            </h3>
-            <div className="h-1 w-16 bg-[#E74C3C] mb-6"></div>
-            <ul className="space-y-3 text-[#BDC3C7]">
-              <li className="hover:text-[#E74C3C] transition-colors duration-300 cursor-pointer">Residential Roofing</li>
-              <li className="hover:text-[#E74C3C] transition-colors duration-300 cursor-pointer">Commercial Roofing</li>
-              <li className="hover:text-[#E74C3C] transition-colors duration-300 cursor-pointer">Emergency Repairs</li>
-              <li className="hover:text-[#E74C3C] transition-colors duration-300 cursor-pointer">Roof Maintenance</li>
-              <li className="hover:text-[#E74C3C] transition-colors duration-300 cursor-pointer">Professional Inspections</li>
+            <h4 className="text-lg font-semibold mb-6">Our Services</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/services/residential-demolition"
+                  className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+                >
+                  Residential Demolition
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/commercial-demolition"
+                  className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+                >
+                  Commercial Demolition
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/selective-demolition"
+                  className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+                >
+                  Selective Demolition
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/site-clearing"
+                  className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+                >
+                  Site Clearing
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Contact Section */}
+          {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-semibold mb-4">
-              GET IN <span className="text-[#E74C3C]">TOUCH</span>
-            </h3>
-            <div className="h-1 w-16 bg-[#E74C3C] mb-6"></div>
-            <div className="text-[#BDC3C7] space-y-4">
-              <div>
-                <p className="font-semibold mb-2">Business Hours:</p>
-                <p>Monday - Friday: 7:00 AM - 6:00 PM</p>
-                <p>Saturday: 8:00 AM - 4:00 PM</p>
-                <p>Sunday: Closed</p>
-                <p className="mt-2 text-[#E74C3C] font-semibold">24/7 Emergency Service Available</p>
-              </div>
-              <div className="pt-4 border-t border-[#34495E]">
-                <div className="flex items-center gap-2 hover:text-[#E74C3C] transition-colors duration-300 cursor-pointer mb-3">
-                  <Phone size={16} />
-                  <p>(778) 654-2681</p>
-                </div>
-                <div className="flex items-center gap-2 hover:text-[#E74C3C] transition-colors duration-300 cursor-pointer mb-3">
-                  <Mail size={16} />
-                  <p>office@roofsvancouver.com</p>
-                </div>
-                <div className="flex items-center gap-2 hover:text-[#E74C3C] transition-colors duration-300 cursor-pointer">
-                  <MapPin size={16} />
-                  <p>Vancouver, BC</p>
-                </div>
-              </div>
-              <div className="flex space-x-4 pt-4">
-                <a href="#" className="p-2 bg-[#34495E] hover:bg-[#E74C3C] transition-all duration-300 rounded-lg">
-                  <Facebook size={20} />
-                </a>
-                <a href="#" className="p-2 bg-[#34495E] hover:bg-[#E74C3C] transition-all duration-300 rounded-lg">
-                  <Twitter size={20} />
-                </a>
-                <a href="#" className="p-2 bg-[#34495E] hover:bg-[#E74C3C] transition-all duration-300 rounded-lg">
-                  <Linkedin size={20} />
-                </a>
-              </div>
-            </div>
+            <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/about"
+                  className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/privacy"
+                  className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/terms"
+                  className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors"
+                >
+                  Terms of Service
+                </Link>
+              </li>
+            </ul>
           </div>
-        </div>
 
-        {/* Bottom Bar */}
-        <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-[#34495E]">
-          <div className="flex flex-col md:flex-row justify-between items-center text-[#95A5A6] text-sm">
-            <div className="text-center md:text-left mb-4 md:mb-0">
-              <p>© {new Date().getFullYear()} Roofs Vancouver by Felicita Holdings Ltd. ALL RIGHTS RESERVED</p>
-            </div>
-            <div className="flex space-x-8">
-              <a href="#" className="hover:text-[#E74C3C] transition-colors duration-300">PRIVACY POLICY</a>
-              <a href="#" className="hover:text-[#E74C3C] transition-colors duration-300">TERMS & CONDITIONS</a>
+          {/* Contact Info */}
+          <div>
+            <h4 className="text-lg font-semibold mb-6">Contact Us</h4>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-[#E74C3C] mt-1" />
+                <div>
+                  <p className="text-[#BDC3C7]">Phone</p>
+                  <a
+                    href="tel:6476974584"
+                    className="text-white hover:text-[#E74C3C] transition-colors"
+                  >
+                    (647) 697-4584
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-[#E74C3C] mt-1" />
+                <div>
+                  <p className="text-[#BDC3C7]">Email</p>
+                  <a
+                    href="mailto:info@torontodemolition.com"
+                    className="text-white hover:text-[#E74C3C] transition-colors"
+                  >
+                    info@torontodemolition.com
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#E74C3C] mt-1" />
+                <div>
+                  <p className="text-[#BDC3C7]">Location</p>
+                  <p className="text-white">Toronto, ON</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-[#34495E]">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[#BDC3C7] text-sm">
+              © {new Date().getFullYear()} Toronto Demolition. All rights
+              reserved.
+            </p>
+            <div className="flex gap-6">
+              <Link
+                href="/privacy"
+                className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors text-sm"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="text-[#BDC3C7] hover:text-[#E74C3C] transition-colors text-sm"
+              >
+                Terms of Service
+              </Link>
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
 

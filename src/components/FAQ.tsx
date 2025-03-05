@@ -1,32 +1,68 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import React from "react";
+import { ArrowRight } from "lucide-react";
 
 const FAQ = () => {
   const faqData = [
     {
       question: "How long does a typical roof replacement take?",
-      answer: "Most residential roof replacements take 2-4 days to complete, depending on the size of your roof, weather conditions, and the type of materials being installed. We'll provide you with a specific timeline during your consultation."
+      answer:
+        "Most residential roof replacements take 2-4 days to complete, depending on the size of your roof, weather conditions, and the type of materials being installed. We'll provide you with a specific timeline during your consultation.",
     },
     {
       question: "Do you provide warranties on your roofing work?",
-      answer: "Yes, we provide comprehensive warranties on both materials and workmanship. Our installations come with a 10-year workmanship warranty, and manufacturer warranties on materials typically range from 25-50 years depending on the product chosen."
+      answer:
+        "Yes, we provide comprehensive warranties on both materials and workmanship. Our installations come with a 10-year workmanship warranty, and manufacturer warranties on materials typically range from 25-50 years depending on the product chosen.",
     },
     {
       question: "Are you licensed and insured?",
-      answer: "Yes, we are fully licensed, bonded, and insured in Vancouver. We carry comprehensive liability insurance and WorkSafeBC coverage for all our workers to ensure your complete protection throughout the project."
+      answer:
+        "Yes, we are fully licensed, bonded, and insured in Vancouver. We carry comprehensive liability insurance and WorkSafeBC coverage for all our workers to ensure your complete protection throughout the project.",
     },
     {
       question: "What roofing materials do you work with?",
-      answer: "We work with all major roofing materials including asphalt shingles, metal roofing, cedar shakes, slate, and flat roofing systems. During your consultation, we'll help you choose the best material for your specific needs and budget."
+      answer:
+        "We work with all major roofing materials including asphalt shingles, metal roofing, cedar shakes, slate, and flat roofing systems. During your consultation, we'll help you choose the best material for your specific needs and budget.",
     },
     {
       question: "Do you offer emergency roof repair services?",
-      answer: "Yes, we provide 24/7 emergency roof repair services for urgent issues like leaks or storm damage. Our team will respond quickly to prevent further damage to your property."
+      answer:
+        "Yes, we provide 24/7 emergency roof repair services for urgent issues like leaks or storm damage. Our team will respond quickly to prevent further damage to your property.",
     },
     {
       question: "What should I expect during the consultation process?",
-      answer: "During the consultation, our expert will thoroughly inspect your roof, discuss your needs and concerns, and provide a detailed written estimate. We'll explain all your options and help you make an informed decision about your roofing project."
-    }
+      answer:
+        "During the consultation, our expert will thoroughly inspect your roof, discuss your needs and concerns, and provide a detailed written estimate. We'll explain all your options and help you make an informed decision about your roofing project.",
+    },
+    {
+      question: "What types of demolition services do you offer?",
+      answer:
+        "We provide comprehensive demolition services including residential, commercial, and industrial demolition. Our services range from complete building demolition to selective demolition, interior demolition, and site clearing. We also handle hazardous material removal and site preparation for new construction.",
+    },
+    {
+      question: "How long does a typical demolition project take?",
+      answer:
+        "Project duration varies based on size and complexity. A typical residential demolition can take 1-2 weeks, while larger commercial projects may take 2-4 weeks. We'll provide a detailed timeline during our initial assessment.",
+    },
+    {
+      question: "Do you handle all the necessary permits?",
+      answer:
+        "Yes, we handle all required permits and documentation, including building permits, environmental permits, and utility disconnection permits. Our team is well-versed in Toronto's building codes and regulations.",
+    },
+    {
+      question: "What safety measures do you implement?",
+      answer:
+        "Safety is our top priority. We implement comprehensive safety protocols including site fencing, dust control, noise management, and regular safety inspections. Our crew is OSHA-certified and follows strict safety guidelines.",
+    },
+    {
+      question: "How do you handle debris and waste materials?",
+      answer:
+        "We follow strict environmental guidelines for waste management. Materials are sorted for recycling when possible, and all waste is properly disposed of at licensed facilities. We maintain detailed documentation of all waste handling.",
+    },
+    {
+      question: "Do you offer emergency demolition services?",
+      answer:
+        "Yes, we provide emergency demolition services for situations requiring immediate attention, such as fire-damaged buildings or structurally unsafe properties. Our team can respond quickly to assess and address urgent situations.",
+    },
   ];
 
   return (
@@ -38,10 +74,11 @@ const FAQ = () => {
               Frequently Asked Questions
             </h3>
             <p className="text-lg mt-4 text-slate-600 dark:text-slate-400">
-              Get answers to common questions about our roofing services
+              Get answers to common questions about our roofing and demolition
+              services
             </p>
           </div>
-          
+
           <div className="w-full md:w-1/2 max-w-xl mx-auto">
             <div className="grid divide-y divide-neutral-200 dark:divide-slate-400">
               {faqData.map((faq, index) => (

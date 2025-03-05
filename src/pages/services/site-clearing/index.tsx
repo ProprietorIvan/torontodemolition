@@ -1,93 +1,76 @@
 import React, { useState } from "react";
 import Navigation from "@/components/Navigation";
 import {
-  Phone,
-  ArrowRight,
+  Wrench,
   Shield,
   Clock,
-  Wrench,
+  ArrowRight,
   CheckCircle2,
-  Building2,
-  Ruler,
+  BadgeCheck,
+  Trash2,
+  ClipboardCheck,
+  DollarSign,
+  Star,
+  ChevronRight,
+  Phone,
+  Mail,
+  MapPin,
+  Calendar,
+  Users,
+  Award,
+  Truck,
+  HardHat,
+  FileText,
+  AlertCircle,
+  Recycle,
+  Leaf,
+  Gauge,
+  BarChart,
+  Target,
+  CheckSquare,
+  AlertTriangle,
+  Check,
 } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
 import SuccessScreen from "@/components/SuccessScreen";
-import { Lead } from "@/utils/createLead";
+import Image from "next/image";
 
 interface FormData {
   name: string;
   phone: string;
   address: string;
-  details: string;
+  projectDetails: string;
   formType: string;
   email?: string;
 }
 
-const CommercialRoofing = () => {
+const SiteClearing = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
     address: "",
-    details: "",
+    projectDetails: "",
     email: "",
-    formType: "commercial-consultation",
+    formType: "site-clearing",
   });
 
-  const handleContact = () => {
-    window.location.href = "tel:+17786542681";
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const handleCall = () => {
+    window.location.href = "tel:6476974584";
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Add the service type to identify this as a commercial roofing form
     const submissionData = {
       ...formData,
-      serviceType: "commercial-roofing", // This identifies which landing page the form came from
-      projectDetails: formData.details, // Remap to align with API naming conventions
-      facilityType: "Commercial Building", // Add a default facility type for commercial
-      projectSize: "", // Optional - can be added to the form if needed
-      urgency: "", // Optional - can be added to the form if needed
+      serviceType: "site-clearing",
+      facilityType: "",
+      projectSize: "",
+      urgency: "standard",
     };
 
     try {
-      // Create lead for Monday.com
-      const newLead: Lead = {
-        name: formData.name,
-        date_Mjj7SnLm: new Date().toISOString(),
-        lead_status: "New Lead",
-        status_1_Mjj7KSmv: "Commercial Form",
-        text_Mjj7Hg3c: `Project Details: ${formData.details}`,
-        numbers_Mjj7fpib: 0,
-        job_location_mkm418ra: formData.address,
-        lead_phone: formData.phone,
-        lead_email: formData.email,
-        status_1_Mjj77YUc: "Commercial Roofing",
-        status_1_Mjj7Dz0C: "No Payment Due",
-        status_1_Mjj7nPIN: "Not Insurance",
-      };
-
-      // Submit to Monday.com
-      await fetch("/api/monday", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newLead),
-      });
-
-      // Send email notification using the shared email handler
       const emailResponse = await fetch("/api/handler_email", {
         method: "POST",
         headers: {
@@ -100,88 +83,98 @@ const CommercialRoofing = () => {
         throw new Error("Failed to send email notification");
       }
 
-      // Show success message and reset form
       setShowSuccess(true);
       setFormData({
         name: "",
         phone: "",
         address: "",
-        details: "",
+        projectDetails: "",
         email: "",
-        formType: "commercial-consultation",
+        formType: "site-clearing",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("There was an error submitting your request. Please try again.");
+      alert(
+        "There was an error submitting your request. Please try again or call us directly."
+      );
     }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const serviceFeatures = [
     {
-      icon: <Building2 className="w-6 h-6" />,
-      title: "Custom Solutions",
-      description:
-        "Tailored commercial roofing systems for every building type",
+      icon: <Wrench className="w-6 h-6" />,
+      title: "Toronto Experts",
+      description: "Your local site clearing specialists",
     },
     {
       icon: <Shield className="w-6 h-6" />,
-      title: "Industry-Leading Warranty",
-      description: "Comprehensive coverage for your investment",
+      title: "Safety First",
+      description: "Licensed and insured in Toronto",
     },
     {
       icon: <Clock className="w-6 h-6" />,
-      title: "Minimal Disruption",
-      description: "Efficient installation with business continuity in mind",
+      title: "Fast Response",
+      description: "24-hour response time guaranteed",
     },
     {
-      icon: <Wrench className="w-6 h-6" />,
-      title: "Certified Team",
-      description: "Licensed commercial roofing specialists",
+      icon: <HardHat className="w-6 h-6" />,
+      title: "Certified Results",
+      description: "Professional site clearing services",
     },
   ];
 
-  const roofingServices = [
+  const serviceTypes = [
     {
-      title: "Commercial Systems",
+      title: "Site Clearing",
       points: [
-        "Flat roof installations",
-        "Metal roofing systems",
-        "Built-up roofing (BUR)",
-        "Modified bitumen systems",
-      ],
-    },
-    {
-      title: "Maintenance Services",
-      points: [
-        "Preventive maintenance",
-        "Leak detection",
-        "Emergency repairs",
-        "System inspections",
-      ],
-    },
-    {
-      title: "Specialty Services",
-      points: [
-        "Green roof systems",
-        "Cool roof solutions",
-        "Coating applications",
-        "Drainage solutions",
+        "Vegetation removal",
+        "Tree removal",
+        "Stump grinding",
+        "Debris removal",
       ],
     },
     {
       title: "Additional Services",
       points: [
-        "Energy efficiency audits",
-        "Roof asset management",
-        "24/7 emergency service",
-        "Project consulting",
+        "Land clearing",
+        "Brush removal",
+        "Site preparation",
+        "Soil grading",
+      ],
+    },
+    {
+      title: "Site Preparation",
+      points: [
+        "Utility marking",
+        "Permit management",
+        "Environmental assessment",
+        "Site restoration",
+      ],
+    },
+    {
+      title: "Safety Measures",
+      points: [
+        "Hazard assessment",
+        "Equipment safety",
+        "Site security",
+        "Environmental protection",
       ],
     },
   ];
 
   return (
     <div className="min-h-screen bg-[#F5F5F0]">
-      <Navigation />
+      <Navigation transparent />
 
       {/* Hero Section */}
       <section className="relative pt-20 bg-gradient-to-b from-neutral-100 to-[#F5F5F0]">
@@ -191,24 +184,23 @@ const CommercialRoofing = () => {
           <div className="flex flex-col md:flex-row gap-12 items-center py-16">
             <div className="w-full md:w-1/2">
               <div className="inline-block bg-[#E74C3C] text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
-                Professional Commercial Roofing
+                Toronto&apos;s Premier Site Clearing Experts
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-[#2C3E50]">
-                Protect Your
-                <span className="block text-[#E74C3C]">Investment</span>
+                Expert site
+                <span className="block text-[#E74C3C]">clearing.</span>
               </h1>
               <p className="text-xl text-[#5D6D7E] mb-8 leading-relaxed">
-                Advanced commercial roofing solutions engineered for durability
-                and efficiency. Expert installation of all roofing systems
-                including flat roofs, metal roofing, and built-up systems.
+                Toronto&apos;s trusted site clearing specialists. From
+                vegetation removal to complete land clearing, we handle it all.
               </p>
 
               <button
-                onClick={handleContact}
+                onClick={handleCall}
                 className="group inline-flex items-center justify-center gap-3 bg-[#E74C3C] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[#D44332] transition-all duration-300"
               >
                 <Phone className="w-6 h-6" />
-                <span>Request Consultation</span>
+                <span>Get Started Now</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -216,9 +208,10 @@ const CommercialRoofing = () => {
             <div className="w-full md:w-1/2">
               <div className="relative h-[600px] w-full">
                 <Image
-                  src="/photos/homepage/2.jpg"
-                  alt="Professional Commercial Roofing"
+                  src="/photos/homepage/7.jpg"
+                  alt="Toronto Professional Site Clearing"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover rounded-xl"
                   priority
                 />
@@ -234,10 +227,10 @@ const CommercialRoofing = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-[#2C3E50]">
-              Commercial Roofing Excellence
+              Premium Site Clearing Services
             </h2>
             <p className="text-lg text-[#5D6D7E]">
-              Comprehensive solutions for your business property
+              Toronto&apos;s most trusted site clearing specialists
             </p>
           </div>
 
@@ -266,21 +259,21 @@ const CommercialRoofing = () => {
               Our Services
             </h2>
             <p className="text-lg text-[#5D6D7E]">
-              Comprehensive commercial roofing solutions
+              Comprehensive site clearing solutions for Toronto properties
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {roofingServices.map((service, index) => (
+            {serviceTypes.map((type, index) => (
               <div
                 key={index}
                 className="bg-white p-8 rounded-xl hover:shadow-lg transition-shadow duration-300"
               >
                 <h3 className="text-2xl font-bold mb-4 text-[#2C3E50]">
-                  {service.title}
+                  {type.title}
                 </h3>
                 <ul className="space-y-3">
-                  {service.points.map((point, pointIndex) => (
+                  {type.points.map((point, pointIndex) => (
                     <li key={pointIndex} className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#E74C3C]" />
                       <span className="text-[#5D6D7E]">{point}</span>
@@ -293,71 +286,27 @@ const CommercialRoofing = () => {
         </div>
       </section>
 
-      {/* Results Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold mb-6 text-[#2C3E50]">
-                Industry-Leading Quality
-              </h2>
-              <p className="text-lg text-[#5D6D7E] mb-6 leading-relaxed">
-                Our expert team delivers durable commercial roofing solutions
-                engineered for maximum efficiency and longevity. We understand
-                the unique challenges of commercial properties.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Detailed site assessment",
-                  "Custom system design",
-                  "Professional installation",
-                  "Long-term maintenance plans",
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-[#E74C3C]" />
-                    <span className="text-[#5D6D7E] font-medium">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative h-[500px]">
-              <Image
-                src="/photos/homepage/4.jpg"
-                alt="Commercial Roofing Quality"
-                fill
-                className="object-cover rounded-xl"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Request Form Section */}
-      <section className="py-20 bg-[#F5F5F0]">
+      {/* Form Section */}
+      <section className="py-20 bg-white" id="contactform">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#2C3E50]">
-              Request a Consultation
+              Request a Quote
             </h2>
             <p className="text-lg text-[#5D6D7E]">
-              Expert solutions &bull; Efficient installation &bull; Long-term
-              reliability
+              24-hour response • Toronto-wide service
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="bg-[#F5F5F0] rounded-2xl shadow-lg p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-[#2C3E50] mb-2"
-                  >
+                  <label className="block text-sm font-medium text-[#2C3E50] mb-2">
                     Name *
                   </label>
                   <input
                     type="text"
-                    id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -366,15 +315,11 @@ const CommercialRoofing = () => {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-[#2C3E50] mb-2"
-                  >
+                  <label className="block text-sm font-medium text-[#2C3E50] mb-2">
                     Phone *
                   </label>
                   <input
                     type="tel"
-                    id="phone"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
@@ -385,15 +330,11 @@ const CommercialRoofing = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-[#2C3E50] mb-2"
-                >
+                <label className="block text-sm font-medium text-[#2C3E50] mb-2">
                   Email *
                 </label>
                 <input
                   type="email"
-                  id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -403,15 +344,11 @@ const CommercialRoofing = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="address"
-                  className="block text-sm font-medium text-[#2C3E50] mb-2"
-                >
-                  Business Address *
+                <label className="block text-sm font-medium text-[#2C3E50] mb-2">
+                  Property Address *
                 </label>
                 <input
                   type="text"
-                  id="address"
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
@@ -421,44 +358,124 @@ const CommercialRoofing = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="details"
-                  className="block text-sm font-medium text-[#2C3E50] mb-2"
-                >
+                <label className="block text-sm font-medium text-[#2C3E50] mb-2">
                   Project Details
                 </label>
                 <textarea
-                  id="details"
-                  name="details"
-                  value={formData.details}
+                  name="projectDetails"
+                  value={formData.projectDetails}
                   onChange={handleChange}
                   rows={4}
                   className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
-                  placeholder="Please describe your commercial roofing needs..."
+                  placeholder="Please describe your project requirements..."
                 ></textarea>
               </div>
 
               {showSuccess ? (
                 <SuccessScreen
-                  email={formData.email}
+                  email={formData.email || ""}
                   setShowSuccess={setShowSuccess}
-                  message="Quote request received!"
-                  subMessage="Our commercial team will contact you shortly"
                 />
               ) : (
                 <button
                   type="submit"
                   className="w-full bg-[#E74C3C] text-white py-4 rounded-lg text-lg font-semibold hover:bg-[#D44332] transition-colors duration-300"
                 >
-                  Schedule Consultation
+                  Submit Quote Request
                 </button>
               )}
-
               <p className="text-sm text-[#5D6D7E] text-center">
-                Professional service &bull; Expert installation &bull;
-                Industry-leading warranty
+                24-hour response • Expert service • Toronto certified
               </p>
             </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Results Section */}
+      <section className="py-20 bg-[#F5F5F0]">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold mb-6 text-[#2C3E50]">
+                Proven Excellence
+              </h2>
+              <p className="text-lg text-[#5D6D7E] mb-6 leading-relaxed">
+                Our certified team delivers comprehensive site clearing
+                solutions, transforming Toronto properties with precision and
+                expertise.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  "Professional site assessment",
+                  "Licensed clearing experts",
+                  "Premium equipment",
+                  "Satisfaction guaranteed",
+                ].map((item, index) => (
+                  <li key={index} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-[#E74C3C]" />
+                    <span className="text-[#5D6D7E] font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative h-[500px]">
+              <Image
+                src="/photos/homepage/8.jpg"
+                alt="Toronto Site Clearing Excellence"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover rounded-xl"
+                priority
+              />
+              <div className="absolute inset-0 rounded-xl ring-1 ring-black/10" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-[#2C3E50]">
+              Common Questions
+            </h2>
+            <p className="text-lg text-[#5D6D7E]">
+              Everything you need to know about our site clearing services
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {[
+              {
+                question: "How long does site clearing typically take?",
+                answer:
+                  "The duration varies depending on the size and complexity of the site. A typical residential lot can take 1-2 days, while larger commercial sites may take several days to a week.",
+              },
+              {
+                question: "Do you handle all the necessary permits?",
+                answer:
+                  "Yes, we handle all required permits and documentation with local authorities. This includes tree removal permits, environmental assessments, and utility marking.",
+              },
+              {
+                question: "What happens to the cleared vegetation?",
+                answer:
+                  "We properly sort and dispose of all vegetation at licensed facilities. We prioritize recycling and environmentally responsible disposal methods.",
+              },
+              {
+                question: "Is your service insured?",
+                answer:
+                  "Yes, we are fully licensed and insured. Our insurance covers both property damage and liability to ensure your peace of mind.",
+              },
+            ].map((faq, index) => (
+              <div key={index} className="bg-[#F5F5F0] p-6 rounded-xl">
+                <h3 className="text-xl font-semibold mb-3 text-[#2C3E50]">
+                  {faq.question}
+                </h3>
+                <p className="text-[#5D6D7E]">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -467,17 +484,17 @@ const CommercialRoofing = () => {
       <section className="py-16 bg-[#2C3E50]">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Vancouver&apos;s Commercial Roofing Experts
+            Toronto&apos;s Trusted Site Clearing Experts
           </h2>
           <p className="text-xl mb-8 text-[#BDC3C7]">
-            Protect your commercial property with industry-leading solutions
+            Professional site clearing services across Greater Toronto
           </p>
           <button
-            onClick={handleContact}
+            onClick={handleCall}
             className="group inline-flex items-center justify-center gap-3 bg-[#E74C3C] text-white px-8 py-4 rounded-full text-xl font-bold hover:bg-[#D44332] transition-all duration-300"
           >
             <Phone className="w-6 h-6" />
-            <span>Schedule Your Consultation</span>
+            <span>Get Started Now</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -486,4 +503,4 @@ const CommercialRoofing = () => {
   );
 };
 
-export default CommercialRoofing;
+export default SiteClearing;

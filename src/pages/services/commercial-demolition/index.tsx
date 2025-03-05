@@ -1,67 +1,77 @@
 import React, { useState } from "react";
 import Navigation from "@/components/Navigation";
 import {
-  Phone,
-  ArrowRight,
+  Building2,
   Shield,
   Clock,
-  Wrench,
+  ArrowRight,
   CheckCircle2,
+  BadgeCheck,
+  Wrench,
+  Trash2,
+  ClipboardCheck,
+  DollarSign,
+  Star,
+  ChevronRight,
+  Phone,
+  Mail,
+  MapPin,
+  Calendar,
+  Users,
   Award,
-  Ruler,
+  Truck,
+  HardHat,
+  FileText,
+  AlertCircle,
+  Recycle,
+  Leaf,
+  Gauge,
+  BarChart,
+  Target,
+  CheckSquare,
+  AlertTriangle,
+  Check,
 } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
 import SuccessScreen from "@/components/SuccessScreen";
+import Image from "next/image";
 
 interface FormData {
   name: string;
   phone: string;
   address: string;
-  details: string;
+  projectDetails: string;
   formType: string;
   email?: string;
 }
 
-const ResidentialRoofing = () => {
+const CommercialDemolition = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
     address: "",
-    details: "",
+    projectDetails: "",
     email: "",
-    formType: "residential-estimate",
+    formType: "commercial-demolition",
   });
 
-  const handleContact = () => {
-    window.location.href = "tel:+17786542681";
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const handleCall = () => {
+    window.location.href = "tel:6476974584";
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Prepare data for the shared email handler API
     const submissionData = {
       ...formData,
-      serviceType: "residential-roofing", // Identifier for the API to know which landing page this came from
-      projectDetails: formData.details, // Map details field to projectDetails for the API
-      facilityType: "Residential", // Set default facility type for residential
-      projectSize: "", // Optional field
-      urgency: "standard", // Setting default urgency level
+      serviceType: "commercial-demolition",
+      facilityType: "",
+      projectSize: "",
+      urgency: "standard",
     };
 
     try {
-      // Send email notification using the shared email handler API
       const emailResponse = await fetch("/api/handler_email", {
         method: "POST",
         headers: {
@@ -74,87 +84,98 @@ const ResidentialRoofing = () => {
         throw new Error("Failed to send email notification");
       }
 
-      // Show success message and reset form
       setShowSuccess(true);
       setFormData({
         name: "",
         phone: "",
         address: "",
-        details: "",
+        projectDetails: "",
         email: "",
-        formType: "residential-estimate",
+        formType: "commercial-demolition",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("There was an error submitting your request. Please try again.");
+      alert(
+        "There was an error submitting your request. Please try again or call us directly."
+      );
     }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const serviceFeatures = [
     {
-      icon: <Wrench className="w-6 h-6" />,
-      title: "Expert Installation",
-      description: "Professional roofing with premium materials and techniques",
+      icon: <Building2 className="w-6 h-6" />,
+      title: "Toronto Experts",
+      description: "Your local commercial demolition specialists",
     },
     {
       icon: <Shield className="w-6 h-6" />,
-      title: "Lifetime Warranty",
-      description: "Guaranteed protection for your investment",
+      title: "Safety First",
+      description: "Licensed and insured in Toronto",
     },
     {
       icon: <Clock className="w-6 h-6" />,
-      title: "Timely Service",
-      description: "Efficient installation with minimal disruption",
+      title: "Fast Response",
+      description: "24-hour response time guaranteed",
     },
     {
-      icon: <Award className="w-6 h-6" />,
-      title: "Certified Team",
-      description: "Licensed and insured roofing professionals",
+      icon: <HardHat className="w-6 h-6" />,
+      title: "Certified Results",
+      description: "Professional demolition services",
     },
   ];
 
-  const roofingServices = [
+  const serviceTypes = [
     {
-      title: "Roof Replacement",
+      title: "Commercial Demolition",
       points: [
-        "Complete roof system installation",
-        "Premium material options",
-        "Expert tear-off and disposal",
-        "Extended warranties available",
-      ],
-    },
-    {
-      title: "Roof Repairs",
-      points: [
-        "Leak detection and repair",
-        "Shingle replacement",
-        "Storm damage restoration",
-        "Preventive maintenance",
-      ],
-    },
-    {
-      title: "Roofing Components",
-      points: [
-        "Ventilation systems",
-        "Gutter installation",
-        "Skylight integration",
-        "Chimney flashing",
+        "Office buildings",
+        "Retail spaces",
+        "Industrial facilities",
+        "Warehouses",
       ],
     },
     {
       title: "Additional Services",
       points: [
-        "Roof inspections",
-        "Attic insulation",
-        "Ice dam prevention",
-        "Emergency repairs",
+        "Interior demolition",
+        "Selective demolition",
+        "Site clearing",
+        "Debris removal",
+      ],
+    },
+    {
+      title: "Site Preparation",
+      points: [
+        "Utility disconnection",
+        "Permit management",
+        "Environmental assessment",
+        "Site restoration",
+      ],
+    },
+    {
+      title: "Safety Measures",
+      points: [
+        "Asbestos removal",
+        "Hazardous material handling",
+        "Dust control",
+        "Site security",
       ],
     },
   ];
 
   return (
     <div className="min-h-screen bg-[#F5F5F0]">
-      <Navigation />
+      <Navigation transparent />
 
       {/* Hero Section */}
       <section className="relative pt-20 bg-gradient-to-b from-neutral-100 to-[#F5F5F0]">
@@ -164,24 +185,23 @@ const ResidentialRoofing = () => {
           <div className="flex flex-col md:flex-row gap-12 items-center py-16">
             <div className="w-full md:w-1/2">
               <div className="inline-block bg-[#E74C3C] text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
-                Professional Residential Roofing
+                Toronto&apos;s Premier Demolition Experts
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-[#2C3E50]">
-                Protect Your
-                <span className="block text-[#E74C3C]">Home Future</span>
+                Expert commercial
+                <span className="block text-[#E74C3C]">demolition.</span>
               </h1>
               <p className="text-xl text-[#5D6D7E] mb-8 leading-relaxed">
-                Expert residential roofing services with premium materials and
-                professional installation. Protecting Vancouver homes with
-                quality craftsmanship for over 25 years.
+                Toronto&apos;s trusted commercial demolition specialists. From
+                office buildings to industrial facilities, we handle it all.
               </p>
 
               <button
-                onClick={handleContact}
+                onClick={handleCall}
                 className="group inline-flex items-center justify-center gap-3 bg-[#E74C3C] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[#D44332] transition-all duration-300"
               >
                 <Phone className="w-6 h-6" />
-                <span>Get Free Estimate</span>
+                <span>Get Started Now</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -189,9 +209,10 @@ const ResidentialRoofing = () => {
             <div className="w-full md:w-1/2">
               <div className="relative h-[600px] w-full">
                 <Image
-                  src="/photos/homepage/1.jpg"
-                  alt="Professional Residential Roofing"
+                  src="/photos/homepage/3.jpg"
+                  alt="Toronto Professional Demolition"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover rounded-xl"
                   priority
                 />
@@ -207,10 +228,10 @@ const ResidentialRoofing = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-[#2C3E50]">
-              Expert Roofing Services
+              Premium Demolition Services
             </h2>
             <p className="text-lg text-[#5D6D7E]">
-              Professional residential roofing solutions
+              Toronto&apos;s most trusted demolition specialists
             </p>
           </div>
 
@@ -239,21 +260,21 @@ const ResidentialRoofing = () => {
               Our Services
             </h2>
             <p className="text-lg text-[#5D6D7E]">
-              Comprehensive roofing solutions for your home
+              Comprehensive demolition solutions for Toronto properties
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {roofingServices.map((service, index) => (
+            {serviceTypes.map((type, index) => (
               <div
                 key={index}
                 className="bg-white p-8 rounded-xl hover:shadow-lg transition-shadow duration-300"
               >
                 <h3 className="text-2xl font-bold mb-4 text-[#2C3E50]">
-                  {service.title}
+                  {type.title}
                 </h3>
                 <ul className="space-y-3">
-                  {service.points.map((point, pointIndex) => (
+                  {type.points.map((point, pointIndex) => (
                     <li key={pointIndex} className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#E74C3C]" />
                       <span className="text-[#5D6D7E]">{point}</span>
@@ -266,25 +287,130 @@ const ResidentialRoofing = () => {
         </div>
       </section>
 
+      {/* Form Section */}
+      <section className="py-20 bg-white" id="contactform">
+        <div className="max-w-3xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#2C3E50]">
+              Request a Quote
+            </h2>
+            <p className="text-lg text-[#5D6D7E]">
+              24-hour response • Toronto-wide service
+            </p>
+          </div>
+
+          <div className="bg-[#F5F5F0] rounded-2xl shadow-lg p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-[#2C3E50] mb-2">
+                    Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[#2C3E50] mb-2">
+                    Phone *
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[#2C3E50] mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[#2C3E50] mb-2">
+                  Property Address *
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[#2C3E50] mb-2">
+                  Project Details
+                </label>
+                <textarea
+                  name="projectDetails"
+                  value={formData.projectDetails}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
+                  placeholder="Please describe your project requirements..."
+                ></textarea>
+              </div>
+
+              {showSuccess ? (
+                <SuccessScreen
+                  email={formData.email || ""}
+                  setShowSuccess={setShowSuccess}
+                />
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full bg-[#E74C3C] text-white py-4 rounded-lg text-lg font-semibold hover:bg-[#D44332] transition-colors duration-300"
+                >
+                  Submit Quote Request
+                </button>
+              )}
+              <p className="text-sm text-[#5D6D7E] text-center">
+                24-hour response • Expert service • Toronto certified
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
       {/* Results Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[#F5F5F0]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold mb-6 text-[#2C3E50]">
-                Quality Guaranteed
+                Proven Excellence
               </h2>
               <p className="text-lg text-[#5D6D7E] mb-6 leading-relaxed">
-                Our expert team ensures your roof is built to last, using
-                premium materials and professional installation techniques to
-                protect your home for decades to come.
+                Our certified team delivers comprehensive demolition solutions,
+                transforming Toronto properties with precision and expertise.
               </p>
               <ul className="space-y-4">
                 {[
-                  "Comprehensive roof inspection",
-                  "Premium material selection",
-                  "Expert installation process",
-                  "Extended warranty options",
+                  "Professional site assessment",
+                  "Licensed demolition experts",
+                  "Premium equipment",
+                  "Satisfaction guaranteed",
                 ].map((item, index) => (
                   <li key={index} className="flex items-center gap-3">
                     <CheckCircle2 className="w-5 h-5 text-[#E74C3C]" />
@@ -296,141 +422,60 @@ const ResidentialRoofing = () => {
             <div className="relative h-[500px]">
               <Image
                 src="/photos/homepage/4.jpg"
-                alt="Quality Roofing Results"
+                alt="Toronto Demolition Excellence"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover rounded-xl"
+                priority
               />
+              <div className="absolute inset-0 rounded-xl ring-1 ring-black/10" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Request Form Section */}
-      <section className="py-20 bg-[#F5F5F0]">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#2C3E50]">
-              Get Your Free Estimate
+      {/* FAQ Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-[#2C3E50]">
+              Common Questions
             </h2>
             <p className="text-lg text-[#5D6D7E]">
-              Professional service • Quality materials • Expert installation
+              Everything you need to know about our demolition services
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-[#2C3E50] mb-2"
-                  >
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-[#2C3E50] mb-2"
-                  >
-                    Phone *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
-                    required
-                  />
-                </div>
+          <div className="space-y-6">
+            {[
+              {
+                question: "How long does commercial demolition typically take?",
+                answer:
+                  "The duration varies depending on the size and complexity of the project. A typical commercial building demolition can take 1-2 weeks, while larger projects may take several weeks.",
+              },
+              {
+                question: "Do you handle all the necessary permits?",
+                answer:
+                  "Yes, we handle all required permits and documentation with local authorities. This includes demolition permits, environmental assessments, and utility disconnection permits.",
+              },
+              {
+                question: "What happens to the debris after demolition?",
+                answer:
+                  "We properly sort and dispose of all debris at licensed facilities. We prioritize recycling and environmentally responsible disposal methods.",
+              },
+              {
+                question: "Is your service insured?",
+                answer:
+                  "Yes, we are fully licensed and insured. Our insurance covers both property damage and liability to ensure your peace of mind.",
+              },
+            ].map((faq, index) => (
+              <div key={index} className="bg-[#F5F5F0] p-6 rounded-xl">
+                <h3 className="text-xl font-semibold mb-3 text-[#2C3E50]">
+                  {faq.question}
+                </h3>
+                <p className="text-[#5D6D7E]">{faq.answer}</p>
               </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-[#2C3E50] mb-2"
-                >
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="address"
-                  className="block text-sm font-medium text-[#2C3E50] mb-2"
-                >
-                  Address *
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="details"
-                  className="block text-sm font-medium text-[#2C3E50] mb-2"
-                >
-                  Service Details
-                </label>
-                <textarea
-                  id="details"
-                  name="details"
-                  value={formData.details}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-200 focus:ring-2 focus:ring-[#E74C3C] focus:border-transparent"
-                  placeholder="Please describe your roofing needs..."
-                ></textarea>
-              </div>
-
-              {showSuccess ? (
-                <SuccessScreen
-                  email={formData.email}
-                  setShowSuccess={setShowSuccess}
-                  message="Estimate request received!"
-                  subMessage="Our residential team will contact you shortly"
-                />
-              ) : (
-                <button
-                  type="submit"
-                  className="w-full bg-[#E74C3C] text-white py-4 rounded-lg text-lg font-semibold hover:bg-[#D44332] transition-colors duration-300"
-                >
-                  Request Free Estimate
-                </button>
-              )}
-
-              <p className="text-sm text-[#5D6D7E] text-center">
-                Professional service &bull; Expert installation &bull; Lifetime
-                warranty
-              </p>
-            </form>
+            ))}
           </div>
         </div>
       </section>
@@ -439,17 +484,17 @@ const ResidentialRoofing = () => {
       <section className="py-16 bg-[#2C3E50]">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Professional Residential Roofing Services
+            Toronto&apos;s Trusted Demolition Experts
           </h2>
           <p className="text-xl mb-8 text-[#BDC3C7]">
-            Protect your home with Vancouver trusted roofing experts
+            Professional demolition services across Greater Toronto
           </p>
           <button
-            onClick={handleContact}
+            onClick={handleCall}
             className="group inline-flex items-center justify-center gap-3 bg-[#E74C3C] text-white px-8 py-4 rounded-full text-xl font-bold hover:bg-[#D44332] transition-all duration-300"
           >
             <Phone className="w-6 h-6" />
-            <span>Get Your Free Estimate</span>
+            <span>Get Started Now</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -458,4 +503,4 @@ const ResidentialRoofing = () => {
   );
 };
 
-export default ResidentialRoofing;
+export default CommercialDemolition;

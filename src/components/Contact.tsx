@@ -16,7 +16,7 @@ const Contact = () => {
         setTimeout(() => setCopiedEmail(false), 1500);
       }
     } catch (err) {
-      console.error('Failed to copy:', err);
+      console.error("Failed to copy:", err);
     }
   };
 
@@ -24,17 +24,18 @@ const Contact = () => {
     <section className="px-4 sm:px-6 py-16 sm:py-24 md:py-32 bg-white">
       <div className="max-w-4xl mx-auto text-center">
         <h3 className="text-3xl sm:text-4xl font-semibold mb-4 sm:mb-8">
-          Have a question?
+          Need Demolition Services?
         </h3>
         <p className="text-lg sm:text-xl text-gray-500 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
-          Contact us today.
+          Contact The Demolition Company of Toronto today for a free
+          consultation.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 md:gap-8 text-base sm:text-lg px-4">
           <button
-            onClick={() => copyToClipboard("7786534862", true)}
+            onClick={() => copyToClipboard("6476974584", true)}
             className={`flex items-center justify-center px-6 sm:px-8 py-4 rounded-full transition-all duration-200 group ${
-              copiedPhone 
-                ? "bg-green-600 text-white scale-95" 
+              copiedPhone
+                ? "bg-green-600 text-white scale-95"
                 : "bg-gray-900 text-white hover:bg-gray-800"
             }`}
           >
@@ -43,19 +44,19 @@ const Contact = () => {
             ) : (
               <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             )}
-            <span>
-              {copiedPhone ? "Copied!" : "(778) 653-4862"}
-            </span>
+            <span>{copiedPhone ? "Copied!" : "(647) 697-4584"}</span>
             {!copiedPhone && (
               <Copy className="w-4 h-4 sm:w-5 sm:h-5 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             )}
           </button>
 
           <button
-            onClick={() => copyToClipboard("info@azhandyman.ca", false)}
+            onClick={() =>
+              copyToClipboard("office@toronto-demolition.com", false)
+            }
             className={`flex items-center justify-center px-6 sm:px-8 py-4 rounded-full transition-all duration-200 group ${
-              copiedEmail 
-                ? "bg-green-600 text-white scale-95" 
+              copiedEmail
+                ? "bg-green-600 text-white scale-95"
                 : "bg-white text-gray-900 hover:bg-gray-50 shadow-sm"
             }`}
           >
@@ -65,7 +66,7 @@ const Contact = () => {
               <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             )}
             <span className="hidden sm:inline">
-              {copiedEmail ? "Copied!" : "info@azhandyman.ca"}
+              {copiedEmail ? "Copied!" : "office@toronto-demolition.com"}
             </span>
             <span className="sm:hidden">
               {copiedEmail ? "Copied!" : "Email Us"}
