@@ -18,50 +18,30 @@ const About = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative pt-20 bg-gradient-to-b from-[#2C3E50] to-[#1a2530]">
-        <div className="absolute inset-0 bg-grid-neutral-200 bg-[size:32px_32px] [mask-image:linear-gradient(to_bottom,white,transparent)] opacity-10" />
-
-        <div className="max-w-7xl mx-auto px-4 relative">
-          <div className="flex flex-col md:flex-row gap-12 items-center py-16">
-            <div className="w-full md:w-1/2">
-              <div className="inline-block bg-[#E74C3C] text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
-                Toronto&apos;s Trusted Demolition Experts
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
-                Our Story
-              </h1>
-              <p className="text-xl text-[#BDC3C7] mb-8 leading-relaxed">
-                With over 15 years of experience, we&apos;ve been at the
-                forefront of demolition services in Toronto, delivering
-                excellence in every project.
-              </p>
-            </div>
-
-            <div className="w-full md:w-1/2">
-              <div className="relative h-[60vh] flex items-center justify-center">
-                <div className="absolute inset-0">
-                  <Image
-                    src="/images/hero-bg.jpg"
-                    alt="About Us"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-black/50"></div>
-                </div>
-                <div className="relative z-10 text-center text-white px-4">
-                  <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                    About Us
-                  </h1>
-                  <p className="text-xl md:text-2xl max-w-2xl mx-auto">
-                    Your trusted partner in demolition services since 2008
-                  </p>
-                </div>
-              </div>
-            </div>
+      <div className="relative bg-[#2C3E50]">
+        <div className="absolute inset-0">
+          <Image
+            src="/photos/homepage/2.jpg"
+            alt="Toronto Demolition Team"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2C3E50]/90 to-[#2C3E50]/80" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 py-24 sm:py-32">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl font-bold text-white sm:text-5xl">
+              Your Trusted Demolition Partner in Toronto
+            </h1>
+            <p className="mt-6 text-lg text-[#BDC3C7]">
+              With years of experience and a commitment to excellence, we
+              deliver safe, efficient, and professional demolition services
+              across the Greater Toronto Area.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Mission Section */}
       <section className="py-20 bg-white">
