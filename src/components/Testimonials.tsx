@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { Star } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Testimonials = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
   const testimonials = [
     {
       name: "Michael Chen",
@@ -42,6 +45,40 @@ const Testimonials = () => {
     },
   ];
 
+  const reviewsToShow = {
+    mobile: 1,
+    tablet: 2,
+    desktop: 3,
+  };
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1;
+      return nextIndex >= testimonials.length - (reviewsToShow.desktop - 1)
+        ? 0
+        : nextIndex;
+    });
+  }, [testimonials.length, reviewsToShow.desktop]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0
+        ? testimonials.length - reviewsToShow.desktop
+        : prevIndex - 1
+    );
+    setIsAutoPlaying(false);
+  }, [testimonials.length, reviewsToShow.desktop]);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      handleNext();
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex, isAutoPlaying, handleNext]);
+
   return (
     <section className="py-20 bg-[#F5F5F0]">
       <div className="max-w-7xl mx-auto px-4">
@@ -54,57 +91,106 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {testimonials.map((testimonial, index) => (
+        <div className="relative">
+          <div className="overflow-hidden">
             <div
-              key={index}
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${
+                  currentIndex * (100 / reviewsToShow.desktop)
+                }%)`,
+                transition: "transform 2s ease-in-out",
+              }}
             >
-              <div className="flex items-center mb-4">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                  />
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={`${testimonial.name}-${index}`}
+                  className="w-full min-w-full md:w-1/2 md:min-w-[50%] lg:w-1/3 lg:min-w-[33.333%] px-4"
+                >
+                  <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+                    <div className="flex items-center mb-4">
+                      <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
+                        <Image
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-[#2C3E50]">
+                          {testimonial.name}
+                        </h3>
+                        <p className="text-sm text-[#5D6D7E]">
+                          {testimonial.role}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-5 h-5 text-[#E74C3C] fill-current"
+                        />
+                      ))}
+                    </div>
+
+                    <p className="text-[#5D6D7E] mb-4 italic">
+                      &ldquo;{testimonial.text}&rdquo;
+                    </p>
+
+                    <div className="pt-4 border-t border-neutral-100">
+                      <p className="text-sm font-medium text-[#2C3E50]">
+                        {testimonial.project}
+                      </p>
+                      <p className="text-sm text-[#5D6D7E]">
+                        {testimonial.location}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-[#2C3E50]">
-                    {testimonial.name}
-                  </h3>
-                  <p className="text-sm text-[#5D6D7E]">{testimonial.role}</p>
-                </div>
-              </div>
-
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-5 h-5 text-[#E74C3C] fill-current"
-                  />
-                ))}
-              </div>
-
-              <p className="text-[#5D6D7E] mb-4 italic">
-                &ldquo;{testimonial.text}&rdquo;
-              </p>
-
-              <div className="pt-4 border-t border-neutral-100">
-                <p className="text-sm font-medium text-[#2C3E50]">
-                  {testimonial.project}
-                </p>
-                <p className="text-sm text-[#5D6D7E]">{testimonial.location}</p>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={handlePrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:translate-x-0 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+            aria-label="Previous review"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-0 bg-white p-2 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+            aria-label="Next review"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-lg text-[#5D6D7E]">
-            Join our growing list of satisfied clients across the Greater
-            Toronto Area
-          </p>
+          <a
+            href="https://g.page/r/CT-8D6c5FSyIEAE"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#2C3E50] hover:text-[#E74C3C] transition-colors"
+          >
+            See all our reviews on Google
+            <svg
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
         </div>
       </div>
     </section>
