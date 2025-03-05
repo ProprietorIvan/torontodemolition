@@ -5,9 +5,13 @@ import { Menu, X, Phone } from "lucide-react";
 
 interface NavigationProps {
   transparent?: boolean;
+  showActions?: boolean;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ transparent = false }) => {
+const Navigation: React.FC<NavigationProps> = ({
+  transparent = false,
+  showActions = true,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
@@ -45,13 +49,15 @@ const Navigation: React.FC<NavigationProps> = ({ transparent = false }) => {
                 {item.label}
               </Link>
             ))}
-            <a
-              href="tel:6476974584"
-              className="flex items-center gap-2 bg-[#E74C3C] text-white px-4 py-2 rounded-full hover:bg-[#D44332] transition-colors duration-300"
-            >
-              <Phone className="w-4 h-4" />
-              <span>(647) 697-4584</span>
-            </a>
+            {showActions && (
+              <a
+                href="tel:6476974584"
+                className="flex items-center gap-2 bg-[#E74C3C] text-white px-4 py-2 rounded-full hover:bg-[#D44332] transition-colors duration-300"
+              >
+                <Phone className="w-4 h-4" />
+                <span>(647) 697-4584</span>
+              </a>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -81,14 +87,16 @@ const Navigation: React.FC<NavigationProps> = ({ transparent = false }) => {
                   {item.label}
                 </Link>
               ))}
-              <a
-                href="tel:6476974584"
-                className="flex items-center gap-2 bg-[#E74C3C] text-white px-4 py-2 rounded-full hover:bg-[#D44332] transition-colors duration-300 w-fit"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Phone className="w-4 h-4" />
-                <span>(647) 697-4584</span>
-              </a>
+              {showActions && (
+                <a
+                  href="tel:6476974584"
+                  className="flex items-center gap-2 bg-[#E74C3C] text-white px-4 py-2 rounded-full hover:bg-[#D44332] transition-colors duration-300 w-fit"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>(647) 697-4584</span>
+                </a>
+              )}
             </div>
           </div>
         )}
